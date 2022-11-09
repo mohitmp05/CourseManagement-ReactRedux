@@ -1,23 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Col, Container, Row } from "reactstrap";
+import AddCourse from "./components/AddCourse";
+import AllCourses from "./components/AllCourses";
+import Header from "./components/Header";
+import Home from "./components/Home";
+import Menus from "./components/Menus";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import EditCourse from "./components/EditCourse";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <BrowserRouter>
+        <Container>
+          <Header />
+          <Row>
+            <Col md={4}>
+              <Menus />
+            </Col>
+            <Col md={8}>
+              <Switch>
+                <Route exact path="/">
+                  <Home />
+                </Route>
+                <Route path="/home">
+                  <Home />
+                </Route>
+                <Route path="/add-course">
+                  <AddCourse />
+                </Route>
+                <Route path="/view-courses">
+                  <AllCourses />
+                </Route>
+                <Route path="/update/:id">
+                  <EditCourse />
+                </Route>
+              </Switch>
+            </Col>
+          </Row>
+        </Container>
+      </BrowserRouter>
     </div>
   );
 }
